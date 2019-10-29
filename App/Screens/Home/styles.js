@@ -15,16 +15,26 @@ export default {
     alignItems: 'center',
   },
 
+  locationContainer: {flex: 0, justifyContent: 'center'},
+  navigationIcon: {width: 15, height: 15, resizeMode: 'contain'},
+  iconLocation: {
+    width: 40,
+    height: 40,
+    right: 5,
+
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   headerContainer: {
     flex: 0,
-    width: Metrics.screenWidth,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    width: Metrics.screenWidth * 0.9,
+    backgroundColor: 'red',
   },
   contentContainer: {
     flex: 1,
     width: Metrics.screenWidth,
-    paddingHorizontal: 40,
+
     justifyContent: 'center',
     alignItems: 'center',
   },

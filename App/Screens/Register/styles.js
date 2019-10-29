@@ -18,6 +18,7 @@ export default {
   headerContainer: {
     flex: 0,
     width: Metrics.screenWidth,
+
     justifyContent: 'flex-end',
     alignItems: 'center',
   },

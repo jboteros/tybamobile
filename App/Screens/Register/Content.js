@@ -14,18 +14,20 @@ import MyTextInput from '../../Components/MyTextInput';
 
 import styles from './styles';
 
-export default class Login extends Component {
+export default class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
       userEmail: '',
       userPassword: '',
+      userFirstName: '',
+      userLastName: '',
     };
   }
 
   render() {
     const {loading, navigation} = this.props;
-    const {userEmail, userPassword} = this.state;
+    const {userEmail, userPassword, userFirstName, userLastName} = this.state;
     return (
       <LinearGradient
         style={styles.container}
@@ -63,8 +65,24 @@ export default class Login extends Component {
                 Fonts.size.h6,
                 'center',
               )}>
-              {'Sign In'}
+              {'Create an Accoun'}
             </Text>
+            <MyTextInput
+              pHolder={'Nombre'}
+              text={userFirstName}
+              onChangeText={text => this.setState({userFirstName: text})}
+              secureText={false}
+              textContent={'name'}
+              autoCapitalize={'words'}
+            />
+            <MyTextInput
+              pHolder={'Apellido'}
+              text={userLastName}
+              onChangeText={text => this.setState({userLastName: text})}
+              secureText={false}
+              textContent={'familyName'}
+              autoCapitalize={'words'}
+            />
             <MyTextInput
               pHolder={'Email'}
               text={userEmail}
@@ -84,6 +102,7 @@ export default class Login extends Component {
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate('Home', {});
+                // this.props.getPlaces('whas');
               }}
               style={styles.btnContainer}>
               <Text
@@ -92,14 +111,14 @@ export default class Login extends Component {
                   Fonts.size.medium,
                   'center',
                 )}>
-                {'Login'}
+                {'Create Accoun'}
               </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.footerContainer}>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('Register', {});
+                navigation.navigate('Login', {});
               }}
               style={styles.btnRegisterLogin}>
               <Text
@@ -108,7 +127,7 @@ export default class Login extends Component {
                   Fonts.size.medium,
                   'right',
                 )}>
-                {'Create an Account'}
+                {'Sign In'}
               </Text>
             </TouchableOpacity>
           </View>

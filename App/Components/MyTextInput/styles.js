@@ -7,7 +7,7 @@ export default styles = StyleSheet.create({
     borderRadius: Metrics.textInBr,
     alignSelf: 'center',
     //position: "absolute",
-    width: '90%',
+    width: '100%',
     backgroundColor: Colors.textInputBg,
     paddingHorizontal: 10,
   },
