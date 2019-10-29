@@ -1,9 +1,9 @@
-import {GET_PLACES} from './Types';
+import {GET_CITIES} from './Types';
 import apisauce from 'apisauce';
 
-export const getPlaces = (lat, long) => dispatch => {
+export const getCities = query => dispatch => {
   const api = apisauce.create({
-    baseURL: `https://developers.zomato.com/api/v2.1/geocode??lat=${lat}&lon=${long}`,
+    baseURL: `https://developers.zomato.com/api/v2.1/locations?&count=5&query=${query}`,
     headers: {
       Accept: 'application/json',
       'user-key': '53901f7560f04951ebf26911dbc43727',
@@ -12,7 +12,7 @@ export const getPlaces = (lat, long) => dispatch => {
   });
 
   return api.get().then(result => {
-    const places = result.data.nearby_restaurants.map(item => {
+    const cities = result.data.location_suggestions.map(item => {
       return new Promise(resolve => {
         resolve({
           ...item,
@@ -20,8 +20,8 @@ export const getPlaces = (lat, long) => dispatch => {
       });
     });
 
-    Promise.all(places).then(response => {
-      return dispatch({type: GET_PLACES, payload: response});
+    Promise.all(cities).then(response => {
+      return dispatch({type: GET_CITIES, payload: response});
     });
   });
 };

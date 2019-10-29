@@ -1,19 +1,19 @@
 import {createReducer} from '../Config';
-import {GET_PLACES} from './Types';
+import {GET_CITIES} from './Types';
 
 const initialState = {
-  places: [],
+  cities: [],
 };
 
-const getPlaces = (state = initialState, {payload}) => {
+const getCities = (state = initialState, {payload}) => {
   return {
     ...state,
-    places: payload,
+    cities: payload,
   };
 };
 
 const descriptor = {
-  [GET_PLACES]: getPlaces,
+  [GET_CITIES]: getCities,
 };
 
 export default createReducer(initialState, descriptor);

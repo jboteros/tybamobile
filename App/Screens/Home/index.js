@@ -2,22 +2,24 @@ import {connect} from 'react-redux';
 import Content from './Content';
 
 import {setLoading} from '../../Core/UI/Actions';
-import {getLocations, getPlaces} from '../../Core/Places/Actions';
+import {getPlaces} from '../../Core/Places/Actions';
+import {getCities} from '../../Core/Cities/Actions';
 
-const mapStateToProps = ({ui, questions}) => {
+const mapStateToProps = ({ui, places, cities}) => {
   const {loading} = ui;
-
+  console.log(places);
   return {
     loading,
-    questions,
+    places,
+    cities: cities.cities,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     setLoading: state => dispatch(setLoading(state)),
-    getLocations: (lat, long) => dispatch(getLocations(lat, long)),
-    getPlaces: query => dispatch(getPlaces(query)),
+    getPlaces: (lat, long) => dispatch(getPlaces(lat, long)),
+    getCities: query => dispatch(getCities(query)),
   };
 };
 

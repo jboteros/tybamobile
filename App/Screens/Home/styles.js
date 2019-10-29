@@ -26,10 +26,31 @@ export default {
     justifyContent: 'center',
     alignItems: 'center',
   },
+  containerCity: {
+    width: '100%',
+    flexDirection: 'column',
+  },
+  containerCites: {
+    flex: 0,
+    width: '100%',
+    // height: 100,
+  },
+  itemCity: {
+    width: '100%',
+    flex: 0,
+    backgroundColor: Colors.light,
+    borderBottomWidth: 0.5,
+    padding: 2.5,
+    borderBottomColor: Colors.dark,
+  },
   headerContainer: {
     flex: 0,
+    alignSelf: 'center',
+    marginTop: Metrics.addHeader + 20,
     width: Metrics.screenWidth * 0.9,
-    backgroundColor: 'red',
+    backgroundColor: Colors.dark,
+    padding: 10,
+    borderRadius: 10,
   },
   contentContainer: {
     flex: 1,
