@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Keyboard,
+  ScrollView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -36,13 +37,11 @@ export default class Home extends Component {
 
     setLoading(true);
     await getCities(str);
-    console.log('cities', cities);
-
     setLoading(false);
   }
 
   render() {
-    const {loading, cities} = this.props;
+    const {loading, cities, places} = this.props;
     const {userLocation, showFinder} = this.state;
     return (
       <LinearGradient
@@ -54,7 +53,6 @@ export default class Home extends Component {
           // style={{position: 'absolute', flex: 1}}
           behavior="padding"
           enabled>
-          <View style={{position: 'absolute', flex: 1}}></View>
           <View style={styles.headerContainer}>
             <Text style={Fonts.style.bold(Colors.light, Fonts.size.h4, 'left')}>
               {'Discover Restaurants\nin your City'}
@@ -125,7 +123,81 @@ export default class Home extends Component {
               {'Enter the name of a city or active your current location'}
             </Text>
           </View>
-          <View style={styles.contentContainer}></View>
+          <ScrollView style={styles.scrollView}>
+            {showFinder == false &&
+              places.length > 0 &&
+              places.map((item, index) => {
+                console.log('places', item);
+                const {restaurant} = item;
+                console.log('restaurant', restaurant);
+                return (
+                  <TouchableOpacity
+                    onPress={() => {}}
+                    key={restaurant.id}
+                    style={styles.itemResto}>
+                    {restaurant.thumb != '' && (
+                      <Image
+                        style={styles.imageResto}
+                        source={{
+                          uri: restaurant.thumb,
+                        }}
+                      />
+                    )}
+                    <View style={styles.textContainerResto}>
+                      <Text
+                        style={Fonts.style.regular(
+                          Colors.dark,
+                          Fonts.size.small,
+                          'left',
+                        )}>
+                        Name:{' '}
+                        <Text
+                          style={Fonts.style.bold(
+                            Colors.dark,
+                            Fonts.size.small,
+                            'left',
+                          )}>
+                          {restaurant.name}
+                        </Text>
+                      </Text>
+                      <Text
+                        style={Fonts.style.regular(
+                          Colors.dark,
+                          Fonts.size.small,
+                          'left',
+                        )}>
+                        Cousine:{' '}
+                        <Text
+                          style={Fonts.style.bold(
+                            Colors.dark,
+                            Fonts.size.small,
+                            'left',
+                          )}>
+                          {restaurant.cuisines}
+                        </Text>
+                      </Text>
+                      <Text
+                        style={Fonts.style.regular(
+                          Colors.dark,
+                          Fonts.size.small,
+                          'left',
+                        )}>
+                        Location:{' '}
+                        <Text
+                          style={Fonts.style.bold(
+                            Colors.dark,
+                            Fonts.size.small,
+                            'left',
+                          )}>
+                          {restaurant.location.address}{' '}
+                          {restaurant.location.city}
+                        </Text>
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                );
+              })}
+          </ScrollView>
           <View style={styles.footerContainer}></View>
         </KeyboardAvoidingView>
 

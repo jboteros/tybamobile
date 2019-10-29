@@ -10,7 +10,7 @@ const mapStateToProps = ({ui, places, cities}) => {
   console.log(places);
   return {
     loading,
-    places,
+    places: places.places,
     cities: cities.cities,
   };
 };

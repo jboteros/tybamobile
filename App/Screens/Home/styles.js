@@ -43,6 +43,26 @@ export default {
     padding: 2.5,
     borderBottomColor: Colors.dark,
   },
+
+  imageResto: {
+    width: 100,
+    height: 100,
+    margin: 5,
+    borderRadius: 5,
+    resizeMode: 'contain',
+  },
+  itemResto: {
+    width: '90%',
+    alignSelf: 'center',
+    marginVertical: 5,
+    flex: 0,
+    borderRadius: 10,
+    backgroundColor: Colors.light,
+    borderBottomWidth: 0.5,
+    padding: 2.5,
+    borderBottomColor: Colors.dark,
+    flexDirection: 'row',
+  },
   headerContainer: {
     flex: 0,
     alignSelf: 'center',
@@ -54,10 +74,17 @@ export default {
   },
   contentContainer: {
     flex: 1,
-    width: Metrics.screenWidth,
 
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: Metrics.screenWidth,
+  },
+
+  textContainerResto: {
+    flex: 1,
+    padding: 10,
+  },
+  scrollView: {
+    flex: 1,
+    width: Metrics.screenWidth,
   },
   footerContainer: {
     flex: 0,
