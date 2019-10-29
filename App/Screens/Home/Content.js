@@ -11,7 +11,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 
 import {Colors, Images, Fonts, Metrics} from '../../Themes';
-
+import Geolocation from '@react-native-community/geolocation';
 import MyTextInput from '../../Components/MyTextInput';
 
 import styles from './styles';
@@ -40,6 +40,16 @@ export default class Home extends Component {
     setLoading(false);
   }
 
+  getLocationUser() {
+    Geolocation.getCurrentPosition(info => {
+      console.log(info);
+      const {coords} = info;
+      console.log(coords);
+      const {latitude, longitude} = coords;
+      this.setState({userLocation: 'My Location'});
+      this.callLocations(latitude, longitude);
+    });
+  }
   render() {
     const {loading, cities, places} = this.props;
     const {userLocation, showFinder} = this.state;
@@ -69,10 +79,14 @@ export default class Home extends Component {
               <TouchableOpacity
                 style={styles.iconLocation}
                 onPress={() => {
-                  this.callGetCities(userLocation);
-
-                  this.setState({showFinder: true});
-                  Keyboard.dismiss();
+                  if (userLocation === '') {
+                    console.log('getLocationUser');
+                    this.getLocationUser();
+                  } else {
+                    this.callGetCities(userLocation);
+                    this.setState({showFinder: true});
+                    Keyboard.dismiss();
+                  }
                 }}>
                 <Image
                   source={
@@ -124,18 +138,17 @@ export default class Home extends Component {
             </Text>
           </View>
           <ScrollView style={styles.scrollView}>
-            {showFinder == false &&
+            {showFinder === false &&
               places.length > 0 &&
               places.map((item, index) => {
-                console.log('places', item);
                 const {restaurant} = item;
-                console.log('restaurant', restaurant);
+
                 return (
                   <TouchableOpacity
                     onPress={() => {}}
                     key={restaurant.id}
                     style={styles.itemResto}>
-                    {restaurant.thumb != '' && (
+                    {restaurant.thumb !== '' && (
                       <Image
                         style={styles.imageResto}
                         source={{
