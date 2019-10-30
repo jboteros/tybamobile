@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import {Colors, Images, Fonts, Metrics} from '../../Themes';
+import {getDistance} from '../../GeoHelper';
+import {Colors, Images, Fonts} from '../../Themes';
 import Geolocation from '@react-native-community/geolocation';
 import MyTextInput from '../../Components/MyTextInput';
 
@@ -22,6 +23,8 @@ export default class Home extends Component {
     this.state = {
       userLocation: '',
       showFinder: false,
+      lat: '',
+      long: '',
     };
   }
 
@@ -46,13 +49,17 @@ export default class Home extends Component {
       const {coords} = info;
       console.log(coords);
       const {latitude, longitude} = coords;
-      this.setState({userLocation: 'My Location'});
+      this.setState({
+        userLocation: 'My Location',
+        lat: latitude,
+        long: longitude,
+      });
       this.callLocations(latitude, longitude);
     });
   }
   render() {
     const {loading, cities, places} = this.props;
-    const {userLocation, showFinder} = this.state;
+    const {userLocation, showFinder, lat, long} = this.state;
     return (
       <LinearGradient
         style={styles.container}
@@ -206,12 +213,33 @@ export default class Home extends Component {
                           {restaurant.location.city}
                         </Text>
                       </Text>
+                      <Text
+                        style={Fonts.style.regular(
+                          Colors.dark,
+                          Fonts.size.small,
+                          'left',
+                        )}>
+                        {'\n'}Distance:{' '}
+                        <Text
+                          style={Fonts.style.bold(
+                            Colors.dark,
+                            Fonts.size.small,
+                            'left',
+                          )}>
+                          {getDistance(
+                            {latitude: lat, longitude: long},
+                            {
+                              latitude: restaurant.location.latitude,
+                              longitude: restaurant.location.longitude,
+                            },
+                          )}
+                        </Text>
+                      </Text>
                     </View>
                   </TouchableOpacity>
                 );
               })}
           </ScrollView>
-          <View style={styles.footerContainer}></View>
         </KeyboardAvoidingView>
 
         {loading && <View style={styles.loading} />}
