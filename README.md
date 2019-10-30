@@ -6,6 +6,8 @@ Tyba Food Places, Johnatan Botero Developer Test
 
 This is a technical test on React Native developed by Johnatan Botero
 
+API Restaurants: https://developers.zomato.com/
+
 ## Setup
 
 Install the complementary packages

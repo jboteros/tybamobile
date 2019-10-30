@@ -7,7 +7,7 @@ import {getCities} from '../../Core/Cities/Actions';
 
 const mapStateToProps = ({ui, places, cities}) => {
   const {loading} = ui;
-  console.log(places);
+
   return {
     loading,
     places: places.places,

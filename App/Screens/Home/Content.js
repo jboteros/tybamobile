@@ -45,9 +45,7 @@ export default class Home extends Component {
 
   getLocationUser() {
     Geolocation.getCurrentPosition(info => {
-      console.log(info);
       const {coords} = info;
-      console.log(coords);
       const {latitude, longitude} = coords;
       this.setState({
         userLocation: 'My Location',
@@ -87,7 +85,6 @@ export default class Home extends Component {
                 style={styles.iconLocation}
                 onPress={() => {
                   if (userLocation === '') {
-                    console.log('getLocationUser');
                     this.getLocationUser();
                   } else {
                     this.callGetCities(userLocation);
